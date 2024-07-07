@@ -46,7 +46,7 @@ Clone this repository and run `npm i` to install dependencies.
 
 Then execute `npm run start` to start the bot.
 
-When the bot started,it will create `config.json` file.The file is like:
+`config.json` contains bot's config.The file is like:
 
 ```json
 {
@@ -60,3 +60,10 @@ When the bot started,it will create `config.json` file.The file is like:
 - `wsUrl`:The (Forward) WebSocket URL of your OneBot service.
 - `groupIds`:`string array`, the list of group id that this bot will work on.
 - `Commanders`:`string array`, is the list of commanders' qq id.
+
+`OPList.json` contains the list of group op.The file is like:
+```json
+{
+    "[groupid]": ["[qqid1]", "[qqid2]"]
+}
+```

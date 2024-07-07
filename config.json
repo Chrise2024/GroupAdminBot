@@ -1,0 +1,6 @@
+{
+    "httpUrl": "http://localhost:8083",
+    "wsUrl": "ws://localhost:15002",
+    "groupIds":[],
+    "Commanders":[]
+}
