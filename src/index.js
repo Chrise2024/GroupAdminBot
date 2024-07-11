@@ -4,6 +4,7 @@ import { initConfig,getConfig } from './utils/config.js';
 import { getPermissionLevel } from './utils/index.js';
 import { parseArgs } from './command/arg.js';
 import { executeCommand } from './command/index.js';
+import { msgFilter } from './utils/messagefilter.js';
 
 initConfig()
 const config = getConfig();
@@ -30,6 +31,7 @@ ws.on('message', (data) => {
         body.message_type === 'group' &&
         config.groupIds.indexOf((body.group_id).toString()) !== -1
     ){
+        msgFilter(body);
         if ((body.message[0].type === 'text' && body.message[0].data.text.startsWith('/')) ||
             (body.message[0].type === 'reply' && body.message[3].type === 'text' && body.message[3].data.text.startsWith('/'))
         ){

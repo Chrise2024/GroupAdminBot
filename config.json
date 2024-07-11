@@ -1,6 +1,24 @@
 {
-    "httpUrl": "http://localhost:8083",
-    "wsUrl": "ws://localhost:15002",
-    "groupIds":[],
-    "Commanders":[]
+    "Commanders": [
+    ],
+    "commands": [
+        "/help",
+        "/titleself",
+        "/ban",
+        "/kick",
+        "/recall",
+        "/settitle",
+        "/op",
+        "/deop",
+        "/setadmin",
+        "/deadmin",
+        "/enable",
+        "/disable"
+    ],
+    "disabledCmd": [
+    ],
+    "groupIds": [
+    ],
+    "httpUrl": "",
+    "wsUrl": ""
 }

@@ -4,7 +4,7 @@ import {getConfig} from './config.js';
 
 const httpUrl = getConfig().httpUrl;
 
-export function sendPlainMsg(groupId,text) {
+export async function sendPlainMsg(groupId,text) {
     try{
         let msgData = {
             'group_id': groupId,
@@ -24,7 +24,11 @@ export function sendPlainMsg(groupId,text) {
             json:true,
             body: msgData
         };
-        request(options, (error, response, data)=>{console.log(data)});
+        request(options, (error, response, data)=>{
+            if (data.status !== 'ok'){
+                console.log(data);
+            }
+        });
         return;
     }
     catch(err){
@@ -32,7 +36,7 @@ export function sendPlainMsg(groupId,text) {
     }
 }
 
-export function setGroupBan(groupId,userId,duration){
+export async function setGroupBan(groupId,userId,duration){
     try{
         let msgData = {
             'group_id': groupId,
@@ -46,7 +50,11 @@ export function setGroupBan(groupId,userId,duration){
             json:true,
             body: msgData
         };
-        request(options, (error, response, data)=>{console.log(data)});
+        request(options, (error, response, data)=>{
+            if (data.status !== 'ok'){
+                console.log(data);
+            }
+        });
         return;
     }
     catch(err){
@@ -79,7 +87,7 @@ export function getAdminList(groupId){
     
 }
 
-export function setGroupKick(groupId,userId,reject = false){
+export async function setGroupKick(groupId,userId,reject = false){
     try{
         let msgData = {
             'group_id': groupId,
@@ -93,7 +101,11 @@ export function setGroupKick(groupId,userId,reject = false){
             json:true,
             body: msgData
         };
-        request(options, (error, response, data)=>{console.log(data)});
+        request(options, (error, response, data)=>{
+            if (data.status !== 'ok'){
+                console.log(data)
+            }
+        });
         return;
     }
     catch(err){
@@ -101,7 +113,7 @@ export function setGroupKick(groupId,userId,reject = false){
     }
 }
 
-export function recallGroupMsg(msgId,groupId = null,userId = null){
+export async function recallGroupMsg(msgId,groupId = null,userId = null){
     try{
         let msgData = {
             'message_id': msgId
@@ -113,7 +125,11 @@ export function recallGroupMsg(msgId,groupId = null,userId = null){
             json:true,
             body: msgData
         };
-        request(options, (error, response, data)=>{console.log(data)});
+        request(options, (error, response, data)=>{
+            if (data.status !== 'ok'){
+                console.log(data);
+            }
+        });
     }
     catch(err){
         console.log(err);
@@ -135,7 +151,7 @@ export function getMsg(msgId){
     }
 }
 
-export function setGroupSpecialTitle(groupId,userId,title){
+export async function setGroupSpecialTitle(groupId,userId,title){
     try{
         let msgData = {
             'group_id': groupId,
@@ -149,14 +165,18 @@ export function setGroupSpecialTitle(groupId,userId,title){
             json:true,
             body: msgData
         };
-        request(options, (error, response, data)=>{console.log(data)});
+        request(options, (error, response, data)=>{
+            if (data.status !== 'ok'){
+                console.log(data);
+            }
+        });
     }
     catch (err){
         console.log(err);
     }
 }
 
-export function setGroupAdmin(groupId,userId){
+export async function setGroupAdmin(groupId,userId){
     try{
         let msgData = {
             'group_id': groupId,
@@ -170,14 +190,18 @@ export function setGroupAdmin(groupId,userId){
             json:true,
             body: msgData
         };
-        request(options, (error, response, data)=>{console.log(data)});
+        request(options, (error, response, data)=>{
+            if (data.status !== 'ok'){
+                console.log(data);
+            }
+        });
     }
     catch (err){
         console.log(err);
     }
 }
 
-export function discardGroupAdmin(groupId,userId){
+export async function discardGroupAdmin(groupId,userId){
     try{
         let msgData = {
             'group_id': groupId,
@@ -191,7 +215,11 @@ export function discardGroupAdmin(groupId,userId){
             json:true,
             body: msgData
         };
-        request(options, (error, response, data)=>{console.log(data)});
+        request(options, (error, response, data)=>{
+            if (data.status !== 'ok'){
+                console.log(data);
+            }
+        });
     }
     catch (err){
         console.log(err);

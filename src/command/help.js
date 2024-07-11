@@ -1,7 +1,7 @@
 import { sendPlainMsg } from "../utils/netapi.js";
 
 const rootHelpText = 
-`------------help------------
+`---------------help---------------
 指令列表：
 权限等级0：
     /titleself - 设置自己的群名片
@@ -25,7 +25,7 @@ const rootHelpText =
     e.g. /help titleself
     `
 const helptitleself = 
-`------------help------------
+`---------------help---------------
 权限等级0
 /titleself - 设置自己的群名片
 使用方法：/titleself <群名片>
@@ -33,7 +33,7 @@ e.g. /titleself 菜就多练
 注意，群名片最多6个汉字或18个英文字符，可以混排，但是容易产生乱码
 `
 const helpban = 
-`------------help------------
+`---------------help---------------
 权限等级1
 /ban - 禁言
 使用方法：/ban <@成员|对应成员的QQ号> <时间(单位秒)>
@@ -41,7 +41,7 @@ e.g. /ban @xxx 3600 或 /ban 123456789 3600
 注意，时长为0的禁言为解除禁言，仅可以禁言权限等级低于自己的成员
 `
 const helpkick = 
-`------------help------------
+`---------------help---------------
 权限等级1
 /kick - 踢出群
 使用方法：/kick <@成员|对应成员的QQ号>
@@ -49,7 +49,7 @@ e.g. /kick @xxx 或 /kick 123456789
 注意，仅可以踢出权限等级低于自己的成员
 `
 const helpsettitle = 
-`------------help------------
+`---------------help---------------
 权限等级1
 /settitle - 设置成员的群名片
 使用方法：/settitle <@成员|对应成员的QQ号> <群名片>
@@ -57,21 +57,21 @@ e.g. /settitle @xxx 菜就多练 或 /settitle 123456789 菜就多练
 注意，群名片最多6个汉字或18个英文字符，可以混排，但是容易产生乱码
 `
 const helprecall = 
-`------------help------------
+`---------------help---------------
 权限等级1
 /recall - 撤回消息
 使用方法：用 /recall 回复想撤回的消息(需要删除回复自带的at)
 注意：仅可以撤回权限等级低于自己的成员的消息
 `
 const helpop =
- `------------help------------
+ `---------------help---------------
  权限等级2
 /op - 设置群管
 使用方法：/op <@成员|对应成员的QQ号>
 e.g. /op @xxx 或 /op 123456789
 `
 const helpdeop = 
-`------------help------------
+`---------------help---------------
 权限等级2
 /deop - 取消群管
 使用方法：/deop <@成员|对应成员的QQ号>
@@ -93,7 +93,7 @@ export function printHelpText(groupid,targetCommand = null){
             sendPlainMsg(groupid, helpkick);
         }
         else if (targetCommand == "settitle"){
-                sendPlainMsg(groupid, helpsettitle);
+            sendPlainMsg(groupid, helpsettitle);
         }
         else if (targetCommand == "recall"){
             sendPlainMsg(groupid, helprecall);
