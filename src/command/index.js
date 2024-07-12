@@ -1,7 +1,7 @@
 import { checkUid,isAdmin,getPermissionLevel } from "../utils/index.js";
 import { commandlog ,commandlogperm} from "../utils/log.js";
 import { addOP, removeOP,getOPList } from "../utils/op.js";
-import { setGroupAdmin, discardGroupAdmin,setGroupSpecialTitle,recallGroupMsg,getMsg,setGroupBan,setGroupKick,getGroupMember,sendPlainMsg } from "../utils/netapi.js";
+import { setGroupAdmin, discardGroupAdmin,setGroupSpecialTitle,recallGroupMsg,getMsg,setGroupBan,setGroupKick,getGroupMember,sendPlainMsg,restart } from "../utils/netapi.js";
 import { printHelpText } from "./help.js";
 import { getConfig,setConfig } from "../utils/config.js";
 
@@ -300,6 +300,13 @@ export async function executeCommand(args,PermissionLevel) {
             console.log("Cannot opreate this command");
             return;
         }
+    }
+    else if (args.command === "/restart") {
+        if (PermissionLevel < 3){
+            commandlogperm(args.command,args.groupid,args.caller);
+            return;
+        }
+        restart();
     }
     else{
         console.log("Unknown command");

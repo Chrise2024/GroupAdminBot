@@ -243,6 +243,29 @@ export function getGroupMember(groupId,userId){
     }
 }
 
+export async function restart(){
+    try{
+        let msgData = {
+            'delay':2000
+        };
+        let options = {
+            headers: {"Connection": "close"},
+            url: httpUrl + '/set_restart',
+            method: 'POST',
+            json:true,
+            body: msgData
+        };
+        request(options, (error, response, data)=>{
+            if (data.status !== 'ok'){
+                console.log(data);
+            }
+        });
+    }
+    catch (err){
+        console.log(err);
+    }
+}
+
 export default{
     sendPlainMsg,
     setGroupBan,
@@ -252,5 +275,6 @@ export default{
     getMsg,
     setGroupSpecialTitle,
     setGroupAdmin,
-    getGroupMember
+    getGroupMember,
+    restart
 }
