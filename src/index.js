@@ -26,13 +26,18 @@ ws.on('close', () => {
 
 ws.on('message', (data) => {
     const body = JSON.parse(data.toString());
-    if (
-        body.post_type === 'message' &&
-        body.message_type === 'group' &&
-        config.groupIds.indexOf((body.group_id).toString()) !== -1
-    ){
-        msgFilter(body);
-        msgHandler(body);
+    try{
+        if (
+            body.post_type === 'message' &&
+            body.message_type === 'group' &&
+            config.groupIds.indexOf((body.group_id).toString()) !== -1
+        ){
+            msgFilter(body);
+            msgHandler(body);
+        }
+    }
+    catch(err){
+        console.log(err);
     }
 });
 

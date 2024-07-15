@@ -11,6 +11,7 @@ var disableList = getConfig().disabledCmd || [];
 export async function executeCommand(args,PermissionLevel) {
     console.log(`Caller Permission Level: ${PermissionLevel}`);
     if (cmdList.indexOf(args.command) === -1) {
+        sendPlainMsg(args.groupid,`未知指令 ${args.command}`);
         console.log("Unknown command");
         return;
     }
@@ -39,6 +40,7 @@ export async function executeCommand(args,PermissionLevel) {
             return;
         }
         else{
+            sendPlainMsg(args.groupid,"无效指令");
             console.log("Invalid Command");
             return;
         }
@@ -49,7 +51,12 @@ export async function executeCommand(args,PermissionLevel) {
         let outStr = '';
         for (let i in opList){
             let memInfo = getGroupMember(args.groupid,opList[i]);
-            outStr += `${memInfo.data.nickname}<${memInfo.data.user_id}>,`;
+            if (memInfo.status === 'failed'){
+                continue;
+            }
+            else{
+                outStr += `${memInfo.data.nickname}<${memInfo.data.user_id}>,`;
+            }
         }
         if (outStr.length > 0){
             console.log(outStr);
@@ -77,6 +84,7 @@ export async function executeCommand(args,PermissionLevel) {
                     return;
                 }
                 else{
+                    sendPlainMsg(args.groupid,"无效的时长");
                     console.log("Invalid Duration");
                     return;
                 }
@@ -87,6 +95,7 @@ export async function executeCommand(args,PermissionLevel) {
             }
         }
         else{
+            sendPlainMsg(args.groupid,"无效的 UID");
             console.log("Invalid UID");
             return;
         }
@@ -111,6 +120,7 @@ export async function executeCommand(args,PermissionLevel) {
             }
         }
         else{
+            sendPlainMsg(args.groupid,"无效的 UID");
             console.log("Invalid UID");
             return;
         }
@@ -136,6 +146,7 @@ export async function executeCommand(args,PermissionLevel) {
             }
         }
         else{
+            sendPlainMsg(args.groupid,"无效的消息ID");
             console.log("Invalid Message ID");
             return;
         }
@@ -160,6 +171,7 @@ export async function executeCommand(args,PermissionLevel) {
             return;
         }
         else{
+            sendPlainMsg(args.groupid,"无效的 UID");
             console.log("Invalid UID");
             return;
         }
@@ -178,6 +190,7 @@ export async function executeCommand(args,PermissionLevel) {
             return;
         }
         else{
+            sendPlainMsg(args.groupid,"无效的 UID");
             console.log("Invalid UID");
             return;
         }
@@ -196,6 +209,7 @@ export async function executeCommand(args,PermissionLevel) {
             return;
         }
         else{
+            sendPlainMsg(args.groupid,"无效的 UID");
             console.log("Invalid UID");
             return;
         }
@@ -218,6 +232,7 @@ export async function executeCommand(args,PermissionLevel) {
             }
         }
         else{
+            sendPlainMsg(args.groupid,"无效的 UID");
             console.log("Invalid UID");
             return;
         }
@@ -240,6 +255,7 @@ export async function executeCommand(args,PermissionLevel) {
             }
         }
         else{
+            sendPlainMsg(args.groupid,"无效的 UID");
             console.log("Invalid UID");
             return;
         }

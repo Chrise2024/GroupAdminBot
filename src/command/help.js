@@ -18,12 +18,14 @@ const rootHelpText =
 权限等级3：
     /setadmin  - 设置管理员
     /deadmin   - 取消管理员
+    /enable    - 启用功能
+    /disable   - 禁用功能
 权限等级：
     群员0，群管1，管理员2，后台3
     仅可以使用权限等级不大于自身权限等级的指令
     使用/help+具体指令查看使用方法
     e.g. /help titleself
-    `
+ `
 const helptitleself = 
 `---------------help---------------
 权限等级0
