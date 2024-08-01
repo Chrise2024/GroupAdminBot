@@ -4,13 +4,13 @@ const rootHelpText =
 `---------------help---------------
 指令列表：
 权限等级0：
-    /titleself - 设置自己的群名片
+    /titleself - 设置自己的群头衔
     /help      - 查看帮助
     /listop    - 查看群管列表
 权限等级1：
     /ban       - 禁言
     /kick      - 踢出群
-    /settitle  - 设置成员的群名片
+    /settitle  - 设置成员的群头衔
     /recall    - 撤回消息
 权限等级2：
     /op        - 设置群管
@@ -29,10 +29,10 @@ const rootHelpText =
 const helptitleself = 
 `---------------help---------------
 权限等级0
-/titleself - 设置自己的群名片
-使用方法：/titleself <群名片>
+/titleself - 设置自己的群头衔
+使用方法：/titleself <群头衔>
 e.g. /titleself 菜就多练
-注意，群名片最多6个汉字或18个英文字符，可以混排，但是容易产生乱码
+注意，群头衔最多6个汉字或18个英文字符，可以混排，但是容易产生乱码
 `
 const helpban = 
 `---------------help---------------
@@ -53,10 +53,10 @@ e.g. /kick @xxx 或 /kick 123456789
 const helpsettitle = 
 `---------------help---------------
 权限等级1
-/settitle - 设置成员的群名片
-使用方法：/settitle <@成员|对应成员的QQ号> <群名片>
+/settitle - 设置成员的群头衔
+使用方法：/settitle <@成员|对应成员的QQ号> <群头衔>
 e.g. /settitle @xxx 菜就多练 或 /settitle 123456789 菜就多练
-注意，群名片最多6个汉字或18个英文字符，可以混排，但是容易产生乱码
+注意，群头衔最多6个汉字或18个英文字符，可以混排，但是容易产生乱码
 `
 const helprecall = 
 `---------------help---------------

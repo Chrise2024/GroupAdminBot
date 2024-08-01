@@ -42,18 +42,23 @@ ws.on('message', (data) => {
 });
 
 async function msgHandler(body){
-    if ((body.message[0].type === 'text' && body.message[0].data.text.startsWith('/')) ||
-    (body.message[0].type === 'reply' && body.message[3].type === 'text' && body.message[3].data.text.startsWith('/'))
-    ){
-        const messgaeSegments = body.message;
-        if (messgaeSegments.length <= 4){
-            const groupId = (body.group_id).toString();
-            const userId = (body.user_id).toString();
-            const PermissionLevel = getPermissionLevel(groupId,userId);
-            const Args = parseArgs(body);
-            if (Args.statue){
-                executeCommand(Args,PermissionLevel);
+    try{
+        if ((body.message[0].type === 'text' && body.message[0].data.text.startsWith('/')) ||
+        (body.message[0].type === 'reply' && body.message[3].type === 'text' && body.message[3].data.text.startsWith('/'))
+        ){
+            const messgaeSegments = body.message;
+            if (messgaeSegments.length <= 4){
+                const groupId = (body.group_id).toString();
+                const userId = (body.user_id).toString();
+                const PermissionLevel = getPermissionLevel(groupId,userId);
+                const Args = parseArgs(body);
+                if (Args.statue){
+                    executeCommand(Args,PermissionLevel);
+                }
             }
         }
+    }
+    catch(err){
+        console.log(err);
     }
 }
