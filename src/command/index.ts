@@ -186,9 +186,11 @@ export async function executeCommand(args:argSchema) {
         }
         commandlog(args.command,args.groupId,args.caller);
         if (!Number.isNaN(parseInt(args.param[0])) && await checkUid(args.groupId,args.param[0])){
-            addOP(args.groupId,args.param[0]);
             const memInfo = await getGroupMember(args.groupId,args.param[0]);
-            sendPlainMsg(args.groupId,`已将[${memInfo.data.nickname}]<${memInfo.data.user_id}>设为群管`);
+            if (memInfo.status === 'failed'){return;}
+            if (addOP(args.groupId,args.param[0])){
+                sendPlainMsg(args.groupId,`已将[${memInfo.data.nickname}]<${memInfo.data.user_id}>设为群管`);
+            }
             return;
         }
         else{
@@ -205,9 +207,12 @@ export async function executeCommand(args:argSchema) {
         }
         commandlog(args.command,args.groupId,args.caller);
         if (!Number.isNaN(parseInt(args.param[0])) && await checkUid(args.groupId,args.param[0])){
-            removeOP(args.groupId,args.param[0]);
+            
             const memInfo = await getGroupMember(args.groupId,args.param[0]);
-            sendPlainMsg(args.groupId,`已取消[${memInfo.data.nickname}]<${memInfo.data.user_id}>群管身份`);
+            if (memInfo.status === 'failed'){return;}
+            if (removeOP(args.groupId,args.param[0])){
+                sendPlainMsg(args.groupId,`已取消[${memInfo.data.nickname}]<${memInfo.data.user_id}>群管身份`);
+            }
             return;
         }
         else{
