@@ -1,0 +1,22 @@
+{
+    "httpUrl": "",
+    "wsUrl": "",
+    "groupIds": [],
+    "Commanders": [],
+    "commands": [
+        "help",
+        "titleself",
+        "ban",
+        "kick",
+        "recall",
+        "settitle",
+        "op",
+        "deop",
+        "setadmin",
+        "deadmin",
+        "enable",
+        "disable"
+    ],
+    "disabledCmd": [],
+    "commandPrefix": "/"
+}

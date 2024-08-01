@@ -1,0 +1,25 @@
+{
+  "name": "group_admin_bot",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node out/index.js",
+    "build": "tsc"
+  },
+  "author": "Shigure",
+  "license": "",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "webpack": "^5.92.0",
+    "webpack-cli": "^5.1.4",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "@types/ws": "^8.5.10",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.5"
+  }
+}
