@@ -2,6 +2,9 @@
 
 A cold QQ bot that provide some group admin functions and add non-admin "group admin",Group OP.
 
+## Note
+This is bot's ts version. Js version will be deprecated.
+
 ## Environment
 
 - Node.js (>= 20)
@@ -32,6 +35,8 @@ Only available in groups specified in the `config.json` file.
 #### Permission Level 3:
 - `/setadmin`  - Set group admin.
 - `/deadmin`   - Cancel group admin.
+- `/enable`    - Enable function
+- `/disable`   - Disable function
 
 #### Permission Level Reference
 - 3: Commanders in `config.json`
@@ -44,6 +49,8 @@ High permission level can execute low or equal permission level commands.Such as
 
 Clone this repository and run `npm i` to install dependencies.
 
+Next execute `npm run build` to build the bot.
+
 Then execute `npm run start` to start the bot.
 
 `config.json` contains bot's config.The file is like:
@@ -53,13 +60,17 @@ Then execute `npm run start` to start the bot.
     "httpUrl": "",
     "wsUrl": "",
     "groupIds":[],
-    "Commanders":[]
+    "Commanders":[],
+    "commands":[],
+    "disabledCmd":[]
 }
 ```
 - `httpUrl`:the http server url of of your OneBot service.
 - `wsUrl`:The (Forward) WebSocket URL of your OneBot service.
 - `groupIds`:`string array`, the list of group id that this bot will work on.
 - `Commanders`:`string array`, is the list of commanders' qq id.
+- `commands` : `string array`, is the list of commands that is avaliable.
+- `disabledCmd` : `string array`, is the list of commands that is disabled.
 
 `OPList.json` contains the list of group op.The file is like:
 ```json
