@@ -6,6 +6,7 @@
     "commands": [
         "help",
         "titleself",
+        "listop",
         "ban",
         "kick",
         "recall",
