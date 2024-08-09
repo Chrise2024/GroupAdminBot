@@ -24,7 +24,7 @@ export async function executeCommand(args:argSchema) {
     }
     else if (args.command === commandPrefix + "titleself") {
         commandlog(args.command,args.groupId,args.caller);
-        setGroupSpecialTitle(args.groupId,args.caller,args.param[0]);
+        await setGroupSpecialTitle(args.groupId,args.caller,args.param[0]);
         return;
     }
     else if (args.command === commandPrefix + "gettalktive") {
@@ -135,8 +135,9 @@ export async function executeCommand(args:argSchema) {
             return;
         }
         commandlog(args.command,args.groupId,args.caller);
-        if ((await getMsg(args.param[0])).status !== 'failed' && (await getMsg(args.param[1])).status !== 'failed'){
-            const targetPermissionLevel = await getPermissionLevel(args.groupId,((await getMsg(args.param[0])).data.sender.user_id).toString());
+        const message = await getMsg(args.param[1]);
+        if ((await getMsg(args.param[0])).status !== 'failed' && message.status !== 'failed'){
+            const targetPermissionLevel = await getPermissionLevel(args.groupId,(message.data.sender.user_id).toString());
             if (PermissionLevel > targetPermissionLevel){
                 recallGroupMsg(args.param[0]);
                 recallGroupMsg(args.param[1]);

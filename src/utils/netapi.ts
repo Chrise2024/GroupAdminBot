@@ -100,7 +100,7 @@ export async function setGroupSpecialTitle(groupId:string,userId:string,title:st
             'user_id' :userId,
             'special_title' :title
         };
-        axios.post(getConfig().httpUrl + '/set_group_special_title',msgData);
+        await axios.post(getConfig().httpUrl + '/set_group_special_title',msgData);
     }
     catch (err){
         console.log(err);

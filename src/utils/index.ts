@@ -13,8 +13,8 @@ function isOP(groupId:string,userId:string){
 }
 
 export async function isAdmin(groupId:string,userId:string){
-    const menber = await getGroupMember(groupId,userId);
-    if (menber.role == 'member') return false;
+    const member = await getGroupMember(groupId,userId);
+    if (member.data.role == 'member') return false;
     return true;
 }
 

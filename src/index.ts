@@ -33,7 +33,7 @@ ws.on('message', (data) => {
             body.message_type === 'group' &&
             Config.groupIds.indexOf((body.group_id).toString()) !== -1
         ){
-            msgFilter(body);
+            //msgFilter(body);
             msgHandler(body);
         }
     }
@@ -45,12 +45,20 @@ ws.on('message', (data) => {
 
 async function msgHandler(body:msgBodySchema){
     try{
-        if (body.raw_message.includes(Config.commandPrefix)){
-            const messgaeSegments:Array<msgSegmentSchema> = body.message;
+        const messgaeSegments:Array<msgSegmentSchema> = body.message;
+        if (
+            (messgaeSegments[0].type === 'text' &&
+            messgaeSegments[0].data.text &&
+            messgaeSegments[0].data.text.startsWith(Config.commandPrefix)) || 
+            (messgaeSegments[0].type === 'reply' &&
+            messgaeSegments[3].type === 'text' &&
+            messgaeSegments[3].data.text &&
+            messgaeSegments[3].data.text.startsWith(Config.commandPrefix))
+            ){
             if (messgaeSegments.length <= 4){
                 const Args:argSchema = await parseArgs(Config.commandPrefix,body);
                 if (Args.status){
-                    executeCommand(Args);
+                    await executeCommand(Args);
                 }
             }
         }
