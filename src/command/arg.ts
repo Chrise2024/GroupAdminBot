@@ -1,6 +1,5 @@
 import { getMsg } from "../utils/netapi.js";
 import { argSchema,msgBodySchema,msgSegmentSchema,defaultArg } from "../utils/dataSchema.js";
-import Config from "./index.js";
 import {getPermissionLevel} from "../utils/index.js";
 
 export async function parseArgs(commandPrefix:string,body:msgBodySchema){

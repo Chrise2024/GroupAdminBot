@@ -2,6 +2,8 @@ import { getOPList } from "./op.js";
 import { getAdminList,getGroupMember } from "./netapi.js";
 import { getConfig } from "./config.js";
 
+const Commanders = getConfig().Commanders;
+
 function isPrivileged(groupId:string,userId:string){
     return isOP(groupId,userId) || isAdmin(groupId,userId) || isCommander(userId);
 }
@@ -19,7 +21,7 @@ export async function isAdmin(groupId:string,userId:string){
 }
 
 function isCommander(userId:string){
-    const CommanderList = getConfig().Commanders || [];
+    const CommanderList = Commanders || [];
     if (CommanderList.length === 0) return false;
     return CommanderList.includes(userId);
 }

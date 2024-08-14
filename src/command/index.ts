@@ -6,10 +6,11 @@ import { printHelpText } from "./help.js";
 import { getConfig,setConfig } from "../utils/config.js";
 import { argSchema } from "../utils/dataSchema.js";
 
+const cmdList = getConfig().commands;
+const commandPrefix = getConfig().commandPrefix;
+var disableList = getConfig().disabledCmd;
+
 export async function executeCommand(args:argSchema) {
-    const cmdList = getConfig().commands;
-    const commandPrefix = getConfig().commandPrefix;
-    var disableList = getConfig().disabledCmd;
     const PermissionLevel = args.permissionLevel;
     console.log(`Caller Permission Level: ${PermissionLevel}`);
     if (cmdList.indexOf(args.command.split(commandPrefix)[1]) === -1) {
