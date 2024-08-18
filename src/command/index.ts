@@ -7,32 +7,32 @@ import { getConfig,setConfig } from "../utils/config.js";
 import { argSchema } from "../utils/dataSchema.js";
 
 const cmdList = getConfig().commands;
-const commandPrefix = getConfig().commandPrefix;
 var disableList = getConfig().disabledCmd;
 
 export async function executeCommand(args:argSchema) {
     const PermissionLevel = args.permissionLevel;
     console.log(`Caller Permission Level: ${PermissionLevel}`);
-    if (cmdList.indexOf(args.command.split(commandPrefix)[1]) === -1) {
+    console.log(JSON.stringify(args));
+    if (cmdList.indexOf(args.command) === -1) {
         sendPlainMsg(args.groupId,`未知指令 ${args.command}`);
         console.log("Unknown command");
         return;
     }
-    else if (disableList.indexOf(args.command.split(commandPrefix)[1]) !== -1) {
+    else if (disableList.indexOf(args.command) !== -1) {
         sendPlainMsg(args.groupId,"该指令已被禁用");
         console.log("Command disabled");
         return;
     }
-    else if (args.command === commandPrefix + "titleself") {
+    else if (args.command === "titleself") {
         commandlog(args.command,args.groupId,args.caller);
         await setGroupSpecialTitle(args.groupId,args.caller,args.param[0]);
         return;
     }
-    else if (args.command === commandPrefix + "gettalktive") {
+    else if (args.command === "gettalktive") {
         commandlog(args.command,args.groupId,args.caller);
         return;
     }
-    else if( args.command === commandPrefix + "help"){
+    else if( args.command === "help"){
         commandlog(args.command,args.groupId,args.caller);
         if (args.param.length === 0){
             printHelpText(args.groupId);
@@ -48,7 +48,7 @@ export async function executeCommand(args:argSchema) {
             return;
         }
     }
-    else if( args.command === commandPrefix + "listop"){
+    else if( args.command === "listop"){
         commandlog(args.command,args.groupId,args.caller);
         const opList = getOPList(args.groupId);
         let outStr = '';
@@ -72,7 +72,7 @@ export async function executeCommand(args:argSchema) {
             return;
         }
     }
-    else if (args.command === commandPrefix + "ban") {
+    else if (args.command === "ban") {
         if (PermissionLevel < 1){
             commandlogperm(args.command,args.groupId,args.caller);
             sendPlainMsg(args.groupId,"权限等级不足");
@@ -104,7 +104,7 @@ export async function executeCommand(args:argSchema) {
         }
         
     }
-    else if (args.command === commandPrefix + "kick") {
+    else if (args.command === "kick") {
         if (PermissionLevel < 1){
             commandlogperm(args.command,args.groupId,args.caller);
             sendPlainMsg(args.groupId,"权限等级不足");
@@ -129,14 +129,14 @@ export async function executeCommand(args:argSchema) {
         }
         
     }
-    else if (args.command === commandPrefix + "recall") {
+    else if (args.command === "recall") {
         if (PermissionLevel < 1){
             commandlogperm(args.command,args.groupId,args.caller);
             sendPlainMsg(args.groupId,"权限等级不足");
             return;
         }
         commandlog(args.command,args.groupId,args.caller);
-        const message = await getMsg(args.param[1]);
+        const message = await getMsg(args.param[0]);
         if ((await getMsg(args.param[0])).status !== 'failed' && message.status !== 'failed'){
             const targetPermissionLevel = await getPermissionLevel(args.groupId,(message.data.sender.user_id).toString());
             if (PermissionLevel > targetPermissionLevel){
@@ -156,14 +156,14 @@ export async function executeCommand(args:argSchema) {
         }
         
     }
-    else if (args.command === commandPrefix + "atall") {
+    else if (args.command === "atall") {
         if (PermissionLevel < 1){
             commandlogperm(args.command,args.groupId,args.caller);
             return false;
         }
         commandlog(args.command,args.groupId,args.caller);
     }
-    else if (args.command === commandPrefix + "settitle") {
+    else if (args.command === "settitle") {
         if (PermissionLevel < 1){
             commandlogperm(args.command,args.groupId,args.caller);
             sendPlainMsg(args.groupId,"权限等级不足");
@@ -180,7 +180,7 @@ export async function executeCommand(args:argSchema) {
             return;
         }
     }
-    else if (args.command === commandPrefix + "op") {
+    else if (args.command === "op") {
         if (PermissionLevel < 2){
             commandlogperm(args.command,args.groupId,args.caller);
             sendPlainMsg(args.groupId,"权限等级不足");
@@ -201,7 +201,7 @@ export async function executeCommand(args:argSchema) {
             return;
         }
     }
-    else if (args.command === commandPrefix + "deop") {
+    else if (args.command === "deop") {
         if (PermissionLevel < 2){
             commandlogperm(args.command,args.groupId,args.caller);
             sendPlainMsg(args.groupId,"权限等级不足");
@@ -223,7 +223,7 @@ export async function executeCommand(args:argSchema) {
             return;
         }
     }
-    else if (args.command === commandPrefix + "setadmin") {
+    else if (args.command === "setadmin") {
         if (PermissionLevel < 3){
             commandlogperm(args.command,args.groupId,args.caller);
             return;
@@ -246,7 +246,7 @@ export async function executeCommand(args:argSchema) {
             return;
         }
     }
-    else if (args.command === commandPrefix + "deadmin"){
+    else if (args.command === "deadmin"){
         if (PermissionLevel < 3){
             commandlogperm(args.command,args.groupId,args.caller);
             return;
@@ -269,7 +269,7 @@ export async function executeCommand(args:argSchema) {
             return;
         }
     }
-    else if (args.command === commandPrefix + "enable") {
+    else if (args.command === "enable") {
         if (PermissionLevel < 3){
             commandlogperm(args.command,args.groupId,args.caller);
             return;
@@ -298,7 +298,7 @@ export async function executeCommand(args:argSchema) {
         }
 
     }
-    else if (args.command === commandPrefix + "disable") {
+    else if (args.command === "disable") {
         if (PermissionLevel < 3){
             commandlogperm(args.command,args.groupId,args.caller);
             return;
@@ -307,7 +307,7 @@ export async function executeCommand(args:argSchema) {
         if (args.param[0] !== "enable" && args.param[0] !== "disable"){
             if (cmdList.indexOf(args.param[0]) !== -1){
                 if (disableList.indexOf(args.param[0]) === -1){
-                    disableList.push(args.param[0].split(commandPrefix)[1]);
+                    disableList.push(args.param[0]);
                     setConfig(getConfig(),"disabledCmd",disableList);
                     return;
                 }
@@ -326,7 +326,7 @@ export async function executeCommand(args:argSchema) {
             return;
         }
     }
-    else if (args.command === commandPrefix + "restart") {
+    else if (args.command === "restart") {
         if (PermissionLevel < 3){
             commandlogperm(args.command,args.groupId,args.caller);
             return;

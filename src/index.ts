@@ -6,7 +6,7 @@ import { msgBodySchema,msgSegmentSchema,configSchema, argSchema } from './utils/
 initConfig();
 console.log('Config loaded');
 const Config:configSchema = getConfig();
-initOPList(getConfig().groupIds);
+initOPList(Config.groupIds);
 const ws = new WebSocket(Config.wsUrl);
 
 import { parseArgs } from './command/arg.js';
@@ -25,7 +25,7 @@ ws.on('close', () => {
     console.log('Disconnected from WebSocket server');
 });
 
-ws.on('message', (data) => {
+ws.on('message',async (data) => {
     try{
         const body:msgBodySchema = JSON.parse(data.toString());
         if (
